@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar'
-import DisplayEvents from '../components/DisplayEvents';
+import EventList from '../components/EventList';
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -12,7 +12,7 @@ function HomePage() {
       />
       <div>
         <h2>Events for {currentDate.toString()}</h2>
-        <DisplayEvents currentDate={currentDate} />
+        <EventList currentDate={currentDate} />
       </div>
     </>
   );
