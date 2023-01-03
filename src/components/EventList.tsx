@@ -22,7 +22,7 @@ const GET_EVENTS = gql`
   }
 `;
 
-function DisplayEvents({ currentDate }: { currentDate: Date }) {
+function EventList({ currentDate }: { currentDate: Date }) {
   const { loading, error, data } = useQuery(GET_EVENTS);
 
   if (loading) return <p>Loading...</p>;
@@ -36,9 +36,8 @@ function DisplayEvents({ currentDate }: { currentDate: Date }) {
         <p>{description}</p>
         <p>{startsAt.toString()}</p>
         <p>{endsAt.toString()}</p>
-        <br />
       </div>
     ));
 }
 
-export default DisplayEvents;
+export default EventList;
