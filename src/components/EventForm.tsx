@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Form, Input, DatePicker } from 'antd'
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { EVENT_CREATE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
 
@@ -51,11 +51,10 @@ function EventForm() {
 
       <Form.Item wrapperCol={{ offset: 2, span: 4 }}>
         <Button type="primary" htmlType="submit">
-          Add Event
+          {loading ? 'Submitting...' : 'Add Event'}
         </Button>
       </Form.Item>
 
-      {loading && 'Submitting...'}
       {error && `Submission error! ${error.message}`}
     </Form>
   );
