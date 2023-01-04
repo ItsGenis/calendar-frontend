@@ -1,10 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 import { Event } from '../interfaces/event';
-import { Button, DatePicker, Form, Input } from 'antd';
+import { Button, Form } from 'antd';
 import { useMutation } from '@apollo/client';
 import { EVENT_UPDATE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
+import EventFormFields from './EventFormFields';
 
 function EventUpdateForm({
   event,
@@ -47,17 +48,7 @@ function EventUpdateForm({
       }}
       autoComplete='off'
     >
-      <Form.Item label='Event Title' name='title'>
-        <Input />
-      </Form.Item>
-
-      <Form.Item label='Event Description' name='description'>
-        <Input.TextArea />
-      </Form.Item>
-
-      <Form.Item label='Event Duration' name='duration'>
-        <DatePicker.RangePicker showTime />
-      </Form.Item>
+      <EventFormFields />
 
       <Form.Item wrapperCol={{ offset: 2, span: 4 }}>
         <Button type='primary' htmlType='submit'>
