@@ -1,25 +1,21 @@
 import React from 'react';
 
-import { Button, Form, Input, DatePicker } from 'antd'
+import { Button, Form, Input, DatePicker } from 'antd';
 import { useMutation } from '@apollo/client';
 import { EVENT_CREATE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
 
-function EventForm() {
+function EventCreateForm() {
   const [eventCreate, { data, loading, error }] = useMutation(EVENT_CREATE, {
-    refetchQueries: [
-      { query: GET_EVENTS },
-      'GetEvents'
-    ],
+    refetchQueries: [{ query: GET_EVENTS }, 'GetEvents'],
   });
-
 
   const onFinish = (values: any) => {
     const variables = {
       title: values.title,
       description: values.description,
       startsAt: values.duration[0],
-      endsAt: values.duration[1]
+      endsAt: values.duration[1],
     };
 
     eventCreate({ variables });
@@ -35,22 +31,22 @@ function EventForm() {
       wrapperCol={{ span: 4 }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      autoComplete="off"
+      autoComplete='off'
     >
-      <Form.Item label="Event Title" name="title">
+      <Form.Item label='Event Title' name='title'>
         <Input />
       </Form.Item>
 
-      <Form.Item label="Event Description" name="description">
+      <Form.Item label='Event Description' name='description'>
         <Input />
       </Form.Item>
 
-      <Form.Item label="Event Duration" name="duration">
+      <Form.Item label='Event Duration' name='duration'>
         <DatePicker.RangePicker showTime />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 2, span: 4 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit'>
           {loading ? 'Submitting...' : 'Add Event'}
         </Button>
       </Form.Item>
@@ -60,4 +56,4 @@ function EventForm() {
   );
 }
 
-export default EventForm;
+export default EventCreateForm;
