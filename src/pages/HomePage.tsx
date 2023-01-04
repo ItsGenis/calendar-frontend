@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
 import moment from 'moment';
 import React, { useState } from 'react';
-import Calendar from 'react-calendar'
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import EventForm from '../components/EventForm';
+import EventCreateForm from '../components/EventCreateForm';
 import EventList from '../components/EventList';
 import { GET_EVENTS } from '../graphql/queries';
 import { Event } from '../interfaces/event';
@@ -18,24 +18,25 @@ function HomePage() {
   const { events } = data;
 
   function tileClassName({ date }: { date: Date }): string {
-    if (events.find((event: Event) => moment(date).isBetween(event.startsAt, event.endsAt))) {
+    if (
+      events.find(
+        (event: Event) =>
+          moment(event.startsAt).isSameOrBefore(date) && moment(event.endsAt).isSameOrAfter(date),
+      )
+    ) {
       return 'with-events';
     } else {
-      return ''
+      return '';
     }
   }
 
   return (
     <>
-      <Calendar
-        view="month"
-        onClickDay={setCurrentDate}
-        tileClassName={tileClassName}
-      />
+      <Calendar view='month' onClickDay={setCurrentDate} tileClassName={tileClassName} />
       <div>
-        <h2>Events for {moment(currentDate).format("dddd, MMMM Do YYYY")}</h2>
+        <h2>Events for {moment(currentDate).format('dddd, MMMM Do YYYY')}</h2>
         <EventList events={events} currentDate={currentDate} />
-        <EventForm />
+        <EventCreateForm />
       </div>
     </>
   );
