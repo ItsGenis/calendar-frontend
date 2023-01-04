@@ -3,6 +3,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
+import EventForm from '../components/EventForm';
 import EventList from '../components/EventList';
 import { Event } from '../interfaces/event';
 
@@ -45,6 +46,7 @@ function HomePage() {
       <div>
         <h2>Events for {currentDate.toString()}</h2>
         <EventList events={events} currentDate={currentDate} />
+        <EventForm />
       </div>
     </>
   );
