@@ -44,7 +44,7 @@ function HomePage() {
         tileClassName={tileClassName}
       />
       <div>
-        <h2>Events for {currentDate.toString()}</h2>
+        <h2>Events for {moment(currentDate).format("dddd, MMMM Do YYYY")}</h2>
         <EventList events={events} currentDate={currentDate} />
         <EventForm />
       </div>
