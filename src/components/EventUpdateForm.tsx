@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { EVENT_UPDATE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
 import EventFormFields from './EventFormFields';
+import dayjs from 'dayjs';
 
 function EventUpdateForm({
   event,
@@ -44,7 +45,7 @@ function EventUpdateForm({
       initialValues={{
         title,
         description,
-        duration: [moment(startsAt), moment(endsAt)],
+        duration: [dayjs(startsAt), dayjs(endsAt)],
       }}
       autoComplete='off'
     >
