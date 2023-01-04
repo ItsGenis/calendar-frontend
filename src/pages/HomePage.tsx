@@ -5,19 +5,8 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import EventForm from '../components/EventForm';
 import EventList from '../components/EventList';
+import { GET_EVENTS } from '../graphql/queries';
 import { Event } from '../interfaces/event';
-
-const GET_EVENTS = gql`
-  query GetEvents {
-    events {
-      id
-      title
-      description
-      startsAt
-      endsAt
-    }
-  }
-`;
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState(new Date());

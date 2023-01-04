@@ -1,10 +1,28 @@
 import React from 'react';
 
 import { Button, Form, Input, DatePicker } from 'antd'
+import { gql, useMutation } from '@apollo/client';
+import { EVENT_CREATE } from '../graphql/mutations';
+import { GET_EVENTS } from '../graphql/queries';
 
 function EventForm() {
+  const [eventCreate, { data, loading, error }] = useMutation(EVENT_CREATE, {
+    refetchQueries: [
+      { query: GET_EVENTS },
+      'GetEvents'
+    ],
+  });
+
+
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    const variables = {
+      title: values.title,
+      description: values.description,
+      startsAt: values.duration[0],
+      endsAt: values.duration[1]
+    };
+
+    eventCreate({ variables });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -15,12 +33,11 @@ function EventForm() {
     <Form
       labelCol={{ span: 2 }}
       wrapperCol={{ span: 4 }}
-      initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item label="Event Name" name="name">
+      <Form.Item label="Event Title" name="title">
         <Input />
       </Form.Item>
 
@@ -37,6 +54,9 @@ function EventForm() {
           Add Event
         </Button>
       </Form.Item>
+
+      {loading && 'Submitting...'}
+      {error && `Submission error! ${error.message}`}
     </Form>
   );
 }
