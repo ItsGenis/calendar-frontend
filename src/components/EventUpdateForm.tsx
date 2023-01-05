@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { Event } from '../interfaces/event';
 import { Button, Form } from 'antd';
 import { useMutation } from '@apollo/client';
@@ -13,7 +12,7 @@ function EventUpdateForm({
   onSuccessEditing,
 }: {
   event: Event;
-  onSuccessEditing: Function;
+  onSuccessEditing: () => void;
 }) {
   const { id, title, description, startsAt, endsAt } = event;
 
@@ -34,14 +33,12 @@ function EventUpdateForm({
     onSuccessEditing();
   }
 
-  function onFinishFailed() {}
-
   return (
     <Form
       labelCol={{ span: 2 }}
       wrapperCol={{ span: 4 }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinishFailed={console.log}
       initialValues={{
         title,
         description,

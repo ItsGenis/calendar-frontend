@@ -1,15 +1,21 @@
 import { useQuery } from '@apollo/client';
-import moment from 'moment';
 import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import { Badge, Calendar } from 'antd';
 import 'react-calendar/dist/Calendar.css';
 import EventCreateForm from '../components/EventCreateForm';
 import EventList from '../components/EventList';
 import { GET_EVENTS } from '../graphql/queries';
 import { Event } from '../interfaces/event';
+import { Dayjs } from 'dayjs';
+
+import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
 
 function HomePage() {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
 
   const { loading, error, data } = useQuery(GET_EVENTS);
   if (loading) return <p>Loading...</p>;
@@ -17,24 +23,29 @@ function HomePage() {
 
   const { events } = data;
 
-  function tileClassName({ date }: { date: Date }): string {
-    if (
-      events.find(
-        (event: Event) =>
-          moment(event.startsAt).isSameOrBefore(date) && moment(event.endsAt).isSameOrAfter(date),
-      )
-    ) {
-      return 'with-events';
-    } else {
-      return '';
-    }
-  }
+  const dateCellRender = (date: Dayjs) => {
+    return (
+      <ul>
+        {events
+          .filter(
+            (event: Event) =>
+              dayjs(event.startsAt).isSameOrBefore(date) && dayjs(event.endsAt).isSameOrAfter(date),
+          )
+          .map((event: Event) => (
+            <li key={event.id}>
+              <Badge status={'processing'} text={event.title} />
+            </li>
+          ))}
+      </ul>
+    );
+  };
 
   return (
     <>
-      <Calendar view='month' onClickDay={setCurrentDate} tileClassName={tileClassName} />
+      <Calendar onSelect={setCurrentDate} dateCellRender={dateCellRender} mode='month' />
+
       <div>
-        <h2>Events for {moment(currentDate).format('dddd, MMMM Do YYYY')}</h2>
+        <h2>Events for {dayjs(currentDate).format('dddd, MMMM Do YYYY')}</h2>
         <EventList events={events} currentDate={currentDate} />
         <EventCreateForm />
       </div>
