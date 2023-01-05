@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import { Event } from '../interfaces/event';
 import { Button, Card } from 'antd';
 import { useMutation } from '@apollo/client';
 import { EVENT_DELETE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
 import EventUpdateForm from './EventUpdateForm';
+import dayjs from 'dayjs';
 
 function CalendarEvent({ event }: { event: Event }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -47,8 +47,8 @@ function CalendarEvent({ event }: { event: Event }) {
       ) : (
         <>
           <p>{description}</p>
-          <p>Starts on: {moment(startsAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</p>
-          <p>Ends on: {moment(endsAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</p>
+          <p>Starts on: {dayjs(startsAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</p>
+          <p>Ends on: {dayjs(endsAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</p>
         </>
       )}
 
