@@ -24,17 +24,19 @@ function CalendarEvent({ event }: { event: Event }) {
     setIsEditing(false);
   }
 
+  function toggleIsEditing() {
+    setIsEditing(!isEditing);
+  }
+
   return (
     <Card
       title={title}
       extra={
         <>
-          {isEditing || (
-            <Button htmlType='button' onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
-          )}
-          <Button htmlType='button' onClick={() => onClickDelete(id)}>
+          <Button htmlType='button' onClick={toggleIsEditing}>
+            {isEditing ? 'Cancel' : 'Edit'}
+          </Button>
+          <Button danger htmlType='button' onClick={() => onClickDelete(id)}>
             {loading ? 'Deleting...' : 'Delete'}
           </Button>
         </>
