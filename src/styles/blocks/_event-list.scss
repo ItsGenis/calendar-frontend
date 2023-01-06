@@ -1,0 +1,20 @@
+.event-list {
+  h2 {
+    margin-top: s(4);
+  }
+  .ant-card {
+    margin-bottom: s(2);
+  }
+  .events {
+    display: flex;
+    padding-top: s(4);
+    padding-bottom: s(4);
+    gap: s(2);
+    @media (max-width: bp('lg')) {
+      display: block;
+    }
+  }
+  .ant-card-extra button {
+    margin-left: s(2);
+  }
+}

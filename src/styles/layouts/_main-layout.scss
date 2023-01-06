@@ -1,0 +1,7 @@
+.main-layout {
+  padding: s(5);
+
+  @media (max-width: bp('lg')) {
+    padding: s(2);
+  }
+}

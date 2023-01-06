@@ -1,0 +1,7 @@
+@function s($spacer) {
+  @return #{map-get($spacers, $spacer)};
+}
+
+@function bp($breakpoint) {
+  @return #{map-get($grid-breakpoints, $breakpoint)};
+}

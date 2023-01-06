@@ -1,0 +1,13 @@
+.calendar-wrapper {
+  .calendar-desktop {
+    @media (max-width: bp('lg')) {
+      display: none;
+    }
+  }
+
+  .calendar-mobile {
+    @media (min-width: bp('lg')) {
+      display: none;
+    }
+  }
+}

@@ -35,8 +35,6 @@ function EventUpdateForm({
 
   return (
     <Form
-      labelCol={{ span: 2 }}
-      wrapperCol={{ span: 4 }}
       onFinish={onFinish}
       onFinishFailed={console.log}
       initialValues={{
