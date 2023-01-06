@@ -42,13 +42,24 @@ function HomePage() {
 
   return (
     <>
-      <Calendar onSelect={setCurrentDate} dateCellRender={dateCellRender} mode='month' />
+      <EventCreateForm />
 
-      <div>
-        <h2>Events for {dayjs(currentDate).format('dddd, MMMM Do YYYY')}</h2>
-        <EventList events={events} currentDate={currentDate} />
-        <EventCreateForm />
+      <div className='calendar-wrapper'>
+        <Calendar
+          className='calendar-desktop'
+          onSelect={setCurrentDate}
+          dateCellRender={dateCellRender}
+          mode='month'
+        />
+        <Calendar
+          className='calendar-mobile'
+          onSelect={setCurrentDate}
+          fullscreen={false}
+          mode='month'
+        />
       </div>
+
+      <EventList events={events} currentDate={currentDate} />
     </>
   );
 }

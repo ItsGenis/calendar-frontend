@@ -17,7 +17,7 @@ function EventFormFields() {
         name='description'
         rules={[{ required: true, message: 'Please enter a description for this event.' }]}
       >
-        <Input.TextArea />
+        <Input.TextArea rows={1} />
       </Form.Item>
 
       <Form.Item

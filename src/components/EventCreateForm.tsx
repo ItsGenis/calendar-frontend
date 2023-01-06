@@ -28,15 +28,15 @@ function EventCreateForm() {
 
   return (
     <Form
-      labelCol={{ span: 2 }}
-      wrapperCol={{ span: 4 }}
+      className='event-create-form'
+      layout='inline'
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
       <EventFormFields />
 
-      <Form.Item wrapperCol={{ offset: 2, span: 4 }}>
+      <Form.Item>
         <Button type='primary' htmlType='submit'>
           {loading ? 'Submitting...' : 'Add Event'}
         </Button>
