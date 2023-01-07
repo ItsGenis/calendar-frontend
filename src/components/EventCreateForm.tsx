@@ -10,6 +10,7 @@ function EventCreateForm() {
   const [eventCreate, { data, loading, error }] = useMutation(EVENT_CREATE, {
     refetchQueries: [{ query: GET_EVENTS }, 'GetEvents'],
   });
+  const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
     const variables = {
@@ -20,6 +21,7 @@ function EventCreateForm() {
     };
 
     eventCreate({ variables });
+    form.resetFields();
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -28,6 +30,7 @@ function EventCreateForm() {
 
   return (
     <Form
+      form={form}
       className='event-create-form'
       layout='inline'
       onFinish={onFinish}
