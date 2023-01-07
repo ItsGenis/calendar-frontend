@@ -10,7 +10,7 @@
     padding-top: s(4);
     padding-bottom: s(4);
     @media (max-width: bp('lg')) {
-      display: block;
+      grid-template-columns: repeat(1, 1fr);
     }
   }
   .ant-card-extra button {
