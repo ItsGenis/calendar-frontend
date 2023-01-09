@@ -31,8 +31,12 @@ function EventCreateForm() {
     form.resetFields();
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const onFinishFailed = () => {
+    notifications.error({
+      message: 'Event could not be created',
+      description: 'Check the form for the errors',
+      placement: 'topLeft',
+    });
   };
 
   return (
