@@ -5,6 +5,7 @@ import './styles/application.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import NotificationContextProvider from './providers/notifications/NotificationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -16,7 +17,9 @@ export const client = new ApolloClient({
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <NotificationContextProvider>
+        <App />
+      </NotificationContextProvider>
     </ApolloProvider>
   </React.StrictMode>,
 );

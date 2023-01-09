@@ -1,19 +1,18 @@
 import React from 'react';
 
-import { Button, Form, notification } from 'antd';
+import { Button, Form } from 'antd';
 import { useMutation } from '@apollo/client';
 import { EVENT_CREATE } from '../graphql/mutations';
 import { GET_EVENTS } from '../graphql/queries';
 import EventFormFields from './EventFormFields';
+import useNotificationContext from '../providers/notifications/useNotification.hook';
 
 function EventCreateForm() {
   const [eventCreate, { data, loading, error }] = useMutation(EVENT_CREATE, {
     refetchQueries: [{ query: GET_EVENTS }, 'GetEvents'],
   });
   const [form] = Form.useForm();
-
-  // TODO: Move this to notification provider for global notifications
-  const [api, contextHolder] = notification.useNotification();
+  const { notifications } = useNotificationContext();
 
   const onFinish = (values: any) => {
     const variables = {
@@ -24,7 +23,7 @@ function EventCreateForm() {
     };
 
     eventCreate({ variables });
-    api.success({
+    notifications.success({
       message: `Event ${values.title} created`,
       description: 'Event successfully created',
       placement: 'topLeft',
@@ -45,7 +44,6 @@ function EventCreateForm() {
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
-      {contextHolder}
       <EventFormFields />
 
       <Form.Item>
