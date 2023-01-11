@@ -3,10 +3,7 @@ import CalendarEvent from './CalendarEvent';
 import { Event } from '../interfaces/event';
 
 import dayjs, { Dayjs } from 'dayjs';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-dayjs.extend(isSameOrBefore);
-dayjs.extend(isSameOrAfter);
+import { filterEventsForDate } from '../lib/DateHelpers';
 
 function EventList({ events, currentDate }: { events: Event[]; currentDate: Dayjs }) {
   return (
@@ -14,12 +11,7 @@ function EventList({ events, currentDate }: { events: Event[]; currentDate: Dayj
       <h2>Events for {dayjs(currentDate).format('dddd, MMMM Do YYYY')}</h2>
 
       <div className='events'>
-        {events
-          .filter(
-            (event: Event) =>
-              dayjs(event.startsAt).isSameOrBefore(currentDate) &&
-              dayjs(event.endsAt).isSameOrAfter(currentDate),
-          )
+        {filterEventsForDate(events, currentDate)
           .sort((eventA: Event, eventB: Event) =>
             dayjs(eventA.startsAt).diff(dayjs(eventB.startsAt)),
           )

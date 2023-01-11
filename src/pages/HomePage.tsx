@@ -7,12 +7,8 @@ import EventList from '../components/EventList';
 import { GET_EVENTS } from '../graphql/queries';
 import { Event } from '../interfaces/event';
 import { Dayjs } from 'dayjs';
-
 import dayjs from 'dayjs';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-dayjs.extend(isSameOrBefore);
-dayjs.extend(isSameOrAfter);
+import { filterEventsForDate } from '../lib/DateHelpers';
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
@@ -27,18 +23,19 @@ function HomePage() {
   const dateCellRender = (date: Dayjs) => {
     return (
       <ul>
-        {events
-          .filter(
-            (event: Event) =>
-              dayjs(event.startsAt).isSameOrBefore(date) && dayjs(event.endsAt).isSameOrAfter(date),
-          )
-          .map((event: Event) => (
-            <li key={event.id}>
-              <Badge status={'processing'} text={event.title} />
-            </li>
-          ))}
+        {filterEventsForDate(events, date).map((event: Event) => (
+          <li key={event.id}>
+            <Badge status={'processing'} text={event.title} />
+          </li>
+        ))}
       </ul>
     );
+  };
+
+  const mobileCellRender = (date: Dayjs) => {
+    const hasEvents = filterEventsForDate(events, date)?.length;
+
+    return hasEvents ? <div className='has-events'></div> : <></>;
   };
 
   return (
@@ -55,6 +52,7 @@ function HomePage() {
         <Calendar
           className='calendar-mobile'
           onSelect={setCurrentDate}
+          dateCellRender={mobileCellRender}
           fullscreen={false}
           mode='month'
         />
