@@ -18,6 +18,10 @@ function HomePage() {
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
 
   const { loading, error, data } = useQuery(GET_EVENTS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
   const { events } = data;
 
   const dateCellRender = (date: Dayjs) => {
@@ -37,8 +41,6 @@ function HomePage() {
     );
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
   return (
     <>
       <EventCreateForm />
