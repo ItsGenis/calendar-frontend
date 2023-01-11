@@ -1,0 +1,13 @@
+@each $icon in $icons {
+  .icon-btn-#{$icon} {
+    &::before {
+      --icon: var(--icon-#{$icon});
+      margin-right: s(1);
+      line-height: s(1);
+      height: 0.8em;
+      width: 0.8em;
+      content: '';
+      @extend %icon;
+    }
+  }
+}

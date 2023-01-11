@@ -51,7 +51,7 @@ function EventCreateForm() {
       <EventFormFields />
 
       <Form.Item>
-        <Button type='primary' htmlType='submit'>
+        <Button type='primary' htmlType='submit' className='icon-btn-plus'>
           {loading ? 'Submitting...' : 'Add Event'}
         </Button>
       </Form.Item>
