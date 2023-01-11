@@ -61,7 +61,7 @@ function EventUpdateForm({
       <EventFormFields />
 
       <Form.Item wrapperCol={{ offset: 2, span: 4 }}>
-        <Button type='primary' htmlType='submit'>
+        <Button type='primary' htmlType='submit' className='icon-btn-save'>
           {loading ? 'Submitting...' : 'Save Event'}
         </Button>
       </Form.Item>

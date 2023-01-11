@@ -49,10 +49,19 @@ function CalendarEvent({ event }: { event: Event }) {
       title={title}
       extra={
         <>
-          <Button htmlType='button' onClick={toggleIsEditing}>
+          <Button
+            htmlType='button'
+            className={isEditing ? 'icon-btn-cross' : 'icon-btn-pencil'}
+            onClick={toggleIsEditing}
+          >
             {isEditing ? 'Cancel' : 'Edit'}
           </Button>
-          <Button danger htmlType='button' onClick={() => onClickDelete(id)}>
+          <Button
+            danger
+            htmlType='button'
+            className='icon-btn-trash'
+            onClick={() => onClickDelete(id)}
+          >
             {loading ? 'Deleting...' : 'Delete'}
           </Button>
         </>
