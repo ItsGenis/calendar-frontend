@@ -43,7 +43,7 @@ function EventCreateForm() {
     <Form
       form={form}
       className='event-create-form'
-      layout='inline'
+      layout='vertical'
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete='off'

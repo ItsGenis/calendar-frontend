@@ -1,3 +1,11 @@
 .event-create-form {
-  padding-bottom: s(5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: s(2);
+
+  @media (min-width: bp('lg')) {
+    flex-direction: row;
+    align-items: flex-end;
+  }
 }
