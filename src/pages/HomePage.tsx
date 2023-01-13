@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { Badge, Calendar } from 'antd';
-import 'react-calendar/dist/Calendar.css';
 import EventCreateForm from '../components/EventCreateForm';
 import EventList from '../components/EventList';
 import { GET_EVENTS } from '../graphql/queries';
